@@ -39,7 +39,7 @@ export function TransactionsTable(){
           </thead>
           <tbody>
             {transactions.map((t) => (
-            <tr>
+            <tr key={t.id} >
               <td >{t.title}</td>
               <td className={t.type} >{t.amount}</td>
               <td>{t.category}</td>
