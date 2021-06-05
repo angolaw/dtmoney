@@ -1,6 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { api } from '../../services/api'
 import {Container} from './styles'
+interface TransactionProps {
+  id: number;
+  title: string;
+  amount: number;
+  type: 'withdraw' | 'deposit';
+  category: string;
+  date: Date;
+  dateFormatted: string;
+}
+
 export function TransactionsTable(){
+  const [transactions, setTransactions] = useState<TransactionProps[]>([]);
+
+  useEffect(() => {
+    async function getTransactions(){
+      const response = await api.get('/transactions');
+      const data = response ? response.data : [];
+      
+      setTransactions(data);
+
+    }
+    getTransactions();
+   
+  },[])
+
   return (
     <Container>
         <table>
@@ -13,24 +38,16 @@ export function TransactionsTable(){
             </tr>
           </thead>
           <tbody>
+            {transactions.map((t) => (
             <tr>
-              <td >Desenvolvimento de app</td>
-              <td className="deposit" >R$ 12000,00</td>
-              <td>Desenvolvimento</td>
-              <td>20/07/2021</td>
+              <td >{t.title}</td>
+              <td className={t.type} >{t.amount}</td>
+              <td>{t.category}</td>
+              <td>{t.date}</td>
             </tr>
-            <tr>
-              <td>Desenvolvimento de app</td>
-              <td className="deposit" >R$ 8000,00</td>
-              <td>Desenvolvimento</td>
-              <td>20/07/2021</td>
-            </tr>
-            <tr >
-              <td>Aluguel</td>
-              <td className="withdraw"> -R$ 1500,00</td>
-              <td>Casa</td>
-              <td>20/07/2021</td>
-            </tr>
+            ))}
+            
+            
           </tbody>
         </table>
     </Container>
