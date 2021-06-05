@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Container, Content} from './styles'
 import logo from '../../assets/logo.svg'
-export function Header(){
+
+
+  interface HeaderProps {
+    handleOpenNewTransactionModal: () => void;
+  }
+
+export function Header({handleOpenNewTransactionModal}:HeaderProps){
+
   return (
     <Container>
       <Content>
         <img src={logo} alt="" />
-        <button>Nova transação </button>
+        <button onClick={handleOpenNewTransactionModal} >Nova transação </button>
       </Content>
+      
     </Container>
   )
 }
