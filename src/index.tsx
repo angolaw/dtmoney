@@ -16,7 +16,7 @@ createServer({
           amount: 4500,
           type: 'deposit',
           category: 'Renda Extra',
-          date: new Date()
+          createdAt: new Date()
         },
         {
           id: 2,
@@ -24,7 +24,7 @@ createServer({
           amount: 2000,
           type: 'deposit',
           category: 'Renda Extra',
-          date: new Date()
+          createdAt: new Date()
         },
         {
           id: 3,
@@ -32,7 +32,7 @@ createServer({
           amount: 2000,
           type: 'withdraw',
           category: 'Pagamentos',
-          date: new Date()
+          createdAt: new Date()
         },
       ]
     })
