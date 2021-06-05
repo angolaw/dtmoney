@@ -5,7 +5,7 @@ import closeImg from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
 import { api } from "../../services/api";
-import { TransactionInput, TransactionProps, TransactionsContext } from "../../TransactionsContext";
+import { TransactionInput, useTransactions } from "../../hooks/useTransactions";
 
 interface NewTransactionModalProps {
   isOpen:boolean;
@@ -18,7 +18,7 @@ export function NewTransactionModal({isOpen,onRequestClose}: NewTransactionModal
   const [amount, setAmount] = useState(0)
   const [transactionType, setTransactionType] = useState('deposit')
   const [category, setCategory] = useState('')
-  const {transactions, createTransaction} = useContext(TransactionsContext)
+  const {transactions, createTransaction} = useTransactions();
 
   async function handleCreateNewTransaction(event:FormEvent){
     event.preventDefault()
