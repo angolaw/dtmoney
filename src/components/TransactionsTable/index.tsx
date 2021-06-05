@@ -17,8 +17,7 @@ export function TransactionsTable(){
   useEffect(() => {
     async function getTransactions(){
       const response = await api.get('/transactions');
-      const data = response ? response.data : [];
-      
+      const data = response ? response.data.transactions : [];
       setTransactions(data);
 
     }
@@ -38,12 +37,15 @@ export function TransactionsTable(){
             </tr>
           </thead>
           <tbody>
-            {transactions.map((t) => (
+            {transactions.length > 0 && transactions.map((t) => (
             <tr key={t.id} >
               <td >{t.title}</td>
-              <td className={t.type} >{t.amount}</td>
+              <td className={t.type} >{new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency:"BRL"
+              }).format(t.amount)}</td>
               <td>{t.category}</td>
-              <td>{t.date}</td>
+              <td>{new Intl.DateTimeFormat('pt-BR').format(new Date(t.date))}</td>
             </tr>
             ))}
             
